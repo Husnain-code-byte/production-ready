@@ -1,0 +1,29 @@
+{
+  "name": "production-level-harness",
+  "version": "2.0.0",
+  "description": "Production Level — Enterprise-grade AI software engineering harness for Google Antigravity (App, IDE, and CLI agy)",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "node scripts/verify-harness.mjs && node scripts/test-craft-gates.mjs && node scripts/verify-all-links.mjs",
+    "test:craft": "node scripts/test-craft-gates.mjs",
+    "verify": "node scripts/verify-harness.mjs",
+    "verify:inventory": "node scripts/verify-inventory.mjs",
+    "verify:links": "node scripts/verify-all-links.mjs",
+    "lint": "node -c scripts/hooks/session-start.js && node -c scripts/hooks/session-end.js && node -c scripts/hooks/scope-enforcer.js && node -c scripts/hooks/effort-governor.js && node -c scripts/hooks/quality-gate.js && node -c scripts/hooks/metrics.js",
+    "typecheck": "node scripts/verify-harness.mjs"
+  },
+  "keywords": [
+    "google-antigravity",
+    "agy",
+    "production-level",
+    "ai-engineering-harness",
+    "multi-agent",
+    "bdd",
+    "c4-architecture"
+  ],
+  "license": "MIT"
+}

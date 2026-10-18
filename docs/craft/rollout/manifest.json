@@ -1,0 +1,54 @@
+{
+  "name": "craft-doctrine-rollout",
+  "version": "1.0.0",
+  "date": "2026-10-18",
+  "author": "Human Architect & Aegis",
+  "description": "Production Level Craft Doctrine, Mechanical Craft Gates, and Governance Alignment Rollout",
+  "components": [
+    {
+      "id": "craft-detectors",
+      "targetDirectory": "scripts/hooks/craft",
+      "files": [
+        "scripts/hooks/craft/detectors/code-detectors.js",
+        "scripts/hooks/craft/detectors/doc-detectors.js",
+        "scripts/hooks/craft/audit.js",
+        "scripts/hooks/craft/formatting.js"
+      ]
+    },
+    {
+      "id": "craft-tests",
+      "targetDirectory": "scripts",
+      "files": [
+        "scripts/test-craft-gates.mjs"
+      ]
+    },
+    {
+      "id": "hook-patches",
+      "targetDirectory": "scripts/hooks",
+      "files": [
+        "scripts/hooks/scope-enforcer.js",
+        "scripts/hooks/quality-gate.js",
+        "scripts/hooks/session-start.js"
+      ]
+    },
+    {
+      "id": "governance-rules",
+      "targetDirectory": ".agents/rules",
+      "files": [
+        ".agents/rules/code-style.md",
+        ".agents/rules/ansdlc-rules.md",
+        ".agents/rules/model-strategy.md",
+        ".agents/rules/testing.md",
+        ".agents/rules/red-flags.md",
+        ".agents/agents/14-refactoring-auditor.md",
+        ".agents/agents/19-documentation-writer.md",
+        "AGENTS.md",
+        "GEMINI.md"
+      ]
+    }
+  ],
+  "verification": [
+    "node scripts/test-craft-gates.mjs",
+    "node scripts/verify-harness.mjs"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "production-level",
+  "displayName": "Production Level",
+  "version": "2.0.0",
+  "description": "Enterprise-grade 9-phase AI software delivery harness with 26 specialized agents, 17 lifecycle skills, dynamic 4-tier effort governance, and zero-trust verification gates.",
+  "logo": "./assets/logo.svg",
+  "suggestedPrompts": [
+    "Run /start-session to initialize the Production Level engineering loop",
+    "Run /phase-check to inspect the current lifecycle phase and next step",
+    "Run /verify-feature to execute the 3-layer verification protocol"
+  ],
+  "disabled": false
+}

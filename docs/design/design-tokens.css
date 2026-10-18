@@ -1,0 +1,288 @@
+/**
+ * Production Level Physical Design Tokens & Spatial Engineering Stylesheet
+ * Single source of truth for semantic design tokens, optical typography scales,
+ * spatial geometry laws, and micro-interaction choreographies.
+ * Reference: project-memory/04-design-system.md
+ */
+
+@layer tokens, base, primitives, utilities;
+
+@layer tokens {
+  :root {
+    /* -------------------------------------------------------------
+     * 1. Perceptual Surface Science & Luminance Stepping (Dark Mode)
+     * ------------------------------------------------------------- */
+    color-scheme: dark light;
+
+    /* Surfaces (Stepped Achromatic Elevation) */
+    --surface-base: #09090B;        /* Page background canvas */
+    --surface-subtle: #121215;      /* Inset sections, sidebars */
+    --surface-card: #18181B;        /* Default card / container surface */
+    --surface-overlay: #222226;     /* Dropdowns, tooltips, dialogs */
+    --surface-hover: #27272A;       /* Interactive hover state */
+    --surface-active: #2E2E33;      /* Interactive pressed state */
+
+    /* Text Hierarchy (Luminance Calibrated & WCAG 2.1 AA Compliant) */
+    --text-primary: #FAFAFA;        /* High-contrast headings and body copy */
+    --text-secondary: #A1A1AA;      /* Secondary descriptions, metadata */
+    --text-muted: #8E8E99;          /* Calibrated: 4.65:1 on card, 5.62:1 on base */
+    --text-inverse: #09090B;        /* Text on light accent buttons */
+
+    /* Semantic Borders & Specular Hairlines */
+    --border-hairline: rgba(255, 255, 255, 0.08); /* 1px structural borders */
+    --border-subtle: rgba(255, 255, 255, 0.12);   /* Card boundaries */
+    --border-focus: #FAFAFA;                       /* Keyboard focus-visible ring */
+    --border-specular: inset 0 1px 0 0 rgba(255, 255, 255, 0.09); /* Top-edge light catch */
+
+    /* Semantic Feedback (Low-Chroma Dark Calibration) */
+    --color-success: #10B981;
+    --color-warning: #F59E0B;
+    --color-error: #F43F5E;
+    --color-info: #0EA5E9;
+    --color-accent: #FAFAFA;
+
+    /* -------------------------------------------------------------
+     * 2. Typographic Precision & Optical Rhythm
+     * ------------------------------------------------------------- */
+    --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", "SF Mono", "Fira Code", Menlo, monospace;
+
+    /* Display & Headings (Fluid Optical Scaling) */
+    --font-display-2xl: 700 clamp(2.25rem, 4vw + 1rem, 3rem)/1.1 var(--font-sans);
+    --font-display-xl:  650 clamp(1.75rem, 3vw + 0.75rem, 2.25rem)/1.15 var(--font-sans);
+    --font-heading-lg:  600 24px/1.25 var(--font-sans);
+    --font-heading-md:  600 18px/1.35 var(--font-sans);
+
+    /* Body Copy */
+    --font-body-lg:     400 16px/1.55 var(--font-sans);
+    --font-body-md:     400 14px/1.5  var(--font-sans);
+    --font-body-sm:     400 12px/1.45 var(--font-sans);
+
+    /* Micro-labels & Code */
+    --font-label-caps:  600 11px/1 var(--font-sans);
+    --font-code:        400 13px/1.5 var(--font-mono);
+
+    /* Optical Letter Spacing */
+    --tracking-display-2xl: -0.035em;
+    --tracking-display-xl:  -0.03em;
+    --tracking-heading-lg:  -0.025em;
+    --tracking-heading-md:  -0.015em;
+    --tracking-body-lg:     -0.005em;
+    --tracking-body-md:      0em;
+    --tracking-body-sm:      0.01em;
+    --tracking-label-caps:   0.04em;
+
+    /* -------------------------------------------------------------
+     * 3. Spatial Geometry & The Concentric Radius Law
+     * Formula: R_outer = R_inner + P_gap
+     * ------------------------------------------------------------- */
+    --radius-xs: 4px;       /* Micro-badges, tags */
+    --radius-sm: 6px;       /* Buttons, inputs, chips (inner elements) */
+    --radius-md: 10px;      /* Cards with 4px internal elements */
+    --radius-lg: 14px;      /* Modals, outer containers with 8px internal padding */
+    --radius-xl: 20px;      /* Large dialogs */
+    --radius-full: 9999px;  /* Avatars, pills */
+
+    /* 4px Base Spacing Grid */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-12: 48px;
+    --space-16: 64px;
+
+    /* -------------------------------------------------------------
+     * 4. Multi-Layered Depth & Hairline Shadows
+     * ------------------------------------------------------------- */
+    --shadow-card:
+      0 0 0 1px var(--border-hairline),
+      0 1px 2px rgba(0, 0, 0, 0.16);
+
+    --shadow-overlay:
+      0 0 0 1px var(--border-subtle),
+      0 4px 8px -2px rgba(0, 0, 0, 0.24),
+      0 12px 24px -4px rgba(0, 0, 0, 0.32);
+
+    --shadow-modal:
+      0 0 0 1px var(--border-subtle),
+      0 12px 32px -8px rgba(0, 0, 0, 0.48),
+      0 24px 64px -16px rgba(0, 0, 0, 0.64);
+
+    /* -------------------------------------------------------------
+     * 5. Micro-Interactions, Spring Physics & Motion Laws
+     * ------------------------------------------------------------- */
+    --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1); /* Out-expo */
+    --duration-snappy: 160ms;
+
+    --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+    --duration-enter: 200ms;
+    --duration-exit: 120ms;
+  }
+
+  /* Light Theme Variant Tokens */
+  [data-theme="light"] {
+    --surface-base: #FFFFFF;
+    --surface-subtle: #F4F4F5;
+    --surface-card: #FFFFFF;
+    --surface-overlay: #FAFAFA;
+    --surface-hover: #F4F4F5;
+    --surface-active: #E4E4E7;
+
+    --text-primary: #09090B;
+    --text-secondary: #52525B;
+    --text-muted: #71717A;
+    --text-inverse: #FAFAFA;
+
+    --border-hairline: rgba(0, 0, 0, 0.08);
+    --border-subtle: rgba(0, 0, 0, 0.12);
+    --border-focus: #09090B;
+    --border-specular: inset 0 1px 0 0 rgba(0, 0, 0, 0.05);
+
+    --color-accent: #09090B;
+
+    --shadow-card:
+      0 0 0 1px var(--border-hairline),
+      0 1px 2px rgba(0, 0, 0, 0.05);
+
+    --shadow-overlay:
+      0 0 0 1px var(--border-subtle),
+      0 4px 6px -1px rgba(0, 0, 0, 0.08),
+      0 10px 15px -3px rgba(0, 0, 0, 0.08);
+
+    --shadow-modal:
+      0 0 0 1px var(--border-subtle),
+      0 10px 25px -5px rgba(0, 0, 0, 0.1),
+      0 20px 25px -5px rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* -------------------------------------------------------------
+ * Base Layer: Reset & Root Grounding
+ * ------------------------------------------------------------- */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--surface-base);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: var(--text-base, 14px);
+    line-height: var(--leading-normal, 1.5);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* -------------------------------------------------------------
+ * Primitives Layer: Components and Surfaces
+ * ------------------------------------------------------------- */
+@layer primitives {
+  /* Concentric Container & Card Surface Primitives */
+  .surface-card {
+    background-color: var(--surface-card);
+    border: 1px solid var(--border-hairline);
+    box-shadow: var(--shadow-card), var(--border-specular);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+  }
+
+  .surface-overlay {
+    background-color: var(--surface-overlay);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-overlay);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+  }
+
+  /* Concentric Geometry Helpers */
+  .concentric-outer {
+    border-radius: var(--radius-lg); /* 14px */
+    padding: var(--space-2);         /* 8px */
+  }
+
+  .concentric-inner {
+    border-radius: var(--radius-sm); /* 6px -> 6 + 8 = 14px outer radius */
+  }
+
+  /* Interactive Target Geometry */
+  .touch-target-desktop {
+    min-height: 32px;
+    min-width: 32px;
+  }
+
+  .touch-target-mobile {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Zero Cumulative Layout Shift (CLS = 0) Shimmer Skeleton */
+  @keyframes ansdlc-shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--surface-subtle) 25%,
+      var(--surface-card) 37%,
+      var(--surface-subtle) 63%
+    );
+    background-size: 200% 100%;
+    animation: ansdlc-shimmer 1.4s ease infinite;
+  }
+}
+
+/* -------------------------------------------------------------
+ * Utilities & Base Invariants Layer
+ * ------------------------------------------------------------- */
+@layer utilities {
+  .tabular-nums {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  .measure-readable {
+    max-width: 65ch;
+  }
+
+  /* Keyboard Accessible Focus-Visible Ring */
+  :focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+  }
+}
+
+/* -------------------------------------------------------------
+ * Accessibility: Reduced Motion Invariants (WCAG 2.3.3)
+ * ------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-snappy: 0.01ms !important;
+    --duration-enter: 0.01ms !important;
+    --duration-exit: 0.01ms !important;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .skeleton-shimmer {
+    animation: none !important;
+    background: var(--surface-card) !important;
+  }
+}

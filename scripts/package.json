@@ -1,0 +1,6 @@
+{
+  "name": "production-level-hooks-runtime",
+  "version": "2.0.0",
+  "type": "module",
+  "private": true
+}

@@ -1,0 +1,62 @@
+{
+  "production-level-harness": {
+    "enabled": true,
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "node ./scripts/hooks/session-start.js",
+        "timeout": 10
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "write_to_file|replace_file_content|run_command|view_file|grep_search|find_by_name|list_dir",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ./scripts/hooks/scope-enforcer.js",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "write_to_file|replace_file_content|run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ./scripts/hooks/quality-gate.js",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "node ./scripts/hooks/effort-governor.js",
+        "timeout": 10
+      }
+    ],
+    "PostInvocation": [
+      {
+        "type": "command",
+        "command": "node ./scripts/hooks/metrics.js",
+        "timeout": 10
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "node ./scripts/hooks/session-end.js",
+        "timeout": 10
+      },
+      {
+        "type": "command",
+        "command": "node ./scripts/hooks/metrics.js",
+        "timeout": 10
+      }
+    ]
+  }
+}

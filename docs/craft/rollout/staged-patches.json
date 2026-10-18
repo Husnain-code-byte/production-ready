@@ -1,0 +1,22 @@
+{
+  "description": "Lifecycle hook enhancements to integrate craft gates and Antigravity-native deny schema",
+  "scopeEnforcerFix": {
+    "target": "scripts/hooks/scope-enforcer.js",
+    "search": "writeStdoutJson({ decision: \"block\", reason: msg });",
+    "replace": "writeStdoutJson({ decision: \"deny\", reason: msg });"
+  },
+  "preWriteGatesFix": {
+    "target": "scripts/hooks/enforcer/pre-write-gates.js",
+    "search": "  const normalized = filePath.replace(/\\\\/g, \"/\");",
+    "replace": "  let normalized = filePath.replace(/\\\\/g, \"/\");\n  if (projectRoot && normalized.startsWith(projectRoot.replace(/\\\\/g, \"/\"))) {\n    normalized = normalized.slice(projectRoot.length).replace(/^\\/+/, \"\");\n  }"
+  },
+  "qualityGateCraftIntegration": {
+    "target": "scripts/hooks/quality-gate.js",
+    "importSnippet": "import { auditCraft } from \"./craft/audit.js\";\nimport { formatCraftWarnings } from \"./craft/formatting.js\";",
+    "auditSnippet": "  try {\n    const craftFindings = auditCraft(rel, content, projectRoot);\n    const craftErrors = craftFindings.filter(f => f.severity === \"error\");\n    const craftAdvice = craftFindings.filter(f => f.severity === \"advice\");\n    if (craftErrors.length > 0) warnings.push(...formatCraftWarnings(craftErrors));\n    if (craftAdvice.length > 0) process.stderr.write(formatCraftWarnings(craftAdvice).join(\"\\n\") + \"\\n\");\n  } catch {}"
+  },
+  "sessionStartCharterInjection": {
+    "target": "scripts/hooks/session-start.js",
+    "snippet": "  const charterPath = path.join(projectRoot, \"docs\", \"craft\", \"charter.md\");\n  if (fs.existsSync(charterPath)) {\n    try {\n      const ch = fs.readFileSync(charterPath, \"utf8\");\n      summary += `\\nCraft Charter:\\n${ch}\\n`;\n    } catch {}\n  }"
+  }
+}

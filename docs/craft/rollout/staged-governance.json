@@ -1,0 +1,17 @@
+{
+  "description": "Staged governance updates incorporating Craft Doctrine, resolving rule tensions, and aligning documentation standards",
+  "rules": {
+    "code-style": {
+      "path": ".agents/rules/code-style.md",
+      "craftSection": "\n## 3. The Craft Invariants & Anti-Brute-Force Standards\n1. **Parsimony Over Cleverness:** Write the minimum code that completely fulfills the contract. Never invent speculative layers or unrequested helper methods.\n2. **Decomposition With Domain Meaning:** Never shred functions into arbitrary sequentially chained fragments solely to bypass cyclomatic complexity limits. Decomposition must produce cohesive, standalone concepts.\n3. **Pure Core, Imperative Shell:** Keep domain decisions inside side-effect-free pure functions. Keep network, file I/O, and clock reads strictly at the system boundary.\n4. **Typing as Static Proof:** Model impossible domain states as unrepresentable types. Never use untyped `any` or suppress type errors.\n"
+    },
+    "testing": {
+      "path": ".agents/rules/testing.md",
+      "clarificationSection": "\n## 3. Contextual Boundary Testing\n- Threat Matrix tests (SSRF, Link-Local metadata, IP normalization) are mandatory for all components that handle external URLs or network targets.\n- Concurrency tests (atomic check-and-insert under mutex) are mandatory for all shared in-memory stores.\n- Boolean coercion checks are mandatory for all numeric/rate endpoints.\n"
+    },
+    "refactoring-auditor": {
+      "path": ".agents/agents/14-refactoring-auditor.md",
+      "clarificationSection": "\n## Dual-Track Refactoring & Craft Review\n- In addition to mechanical limits (CC < 10, lines <= 150), evaluate the code against the 5 Craft Tests (docs/craft/README.md).\n- Respect Law 2: Do not force shared abstractions for 3 similar lines if doing so introduces speculative complexity. True duplication means duplicated business knowledge, not accidental syntactic resemblance.\n"
+    }
+  }
+}
